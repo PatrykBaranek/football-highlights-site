@@ -1,16 +1,18 @@
-const API_URL = 'https://www.scorebat.com/video-api/v3/';
+const url = 'https://www.scorebat.com/video-api/v3/';
 
-async function getHighlights() {
-	const response = await fetch(API_URL);
-	const data = await response.json();
+const getHighlights = async () => {
+	try {
+		const res = await fetch(url);
 
-	const competitionName = data.competition;
-	const matchTitle = data.title;
-	const date = data.date;
-	const video = data.embed;
+		const data = await res.json();
 
-	console.log(data);
+		const { competition, title, videos } = data.response;
+
+		console.log(competition, title, videos);
+	} catch (err) {
+		console.log(err.message);
+	}
 	// console.log(competitionName, matchTitle, date, video);
-}
+};
 
 getHighlights();
